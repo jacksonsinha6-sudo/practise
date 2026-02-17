@@ -1,116 +1,114 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
-  const form = document.querySelector('.contact');
-  const sections = Array.from(document.querySelectorAll('main section[id]'));
-  const revealItems = document.querySelectorAll('.reveal');
-  const counters = document.querySelectorAll('[data-counter]');
-  const typeTarget = document.getElementById('type-target');
-  const themeToggle = document.getElementById('theme-toggle');
+const canvas = document.getElementById('stage');
+const ctx = canvas.getContext('2d');
+const seedBtn = document.getElementById('seed-btn');
+const saveBtn = document.getElementById('save-btn');
+const seedLabel = document.getElementById('seed-label');
+const storyText = document.getElementById('story-text');
+const traits = document.getElementById('traits');
 
-  const words = ['extraordinary', 'futuristic', 'legendary'];
-  let wordIndex = 0;
+const moods = ['luminous', 'melancholic', 'electric', 'calm', 'mythic'];
+const biomes = ['floating reefs', 'crystal dunes', 'neon forests', 'mirror lakes', 'aurora valleys'];
+const events = ['silent meteor rain', 'singing wind', 'fractal bloom', 'tidal pulse', 'clockwork dawn'];
 
-  const animateWord = () => {
-    if (!typeTarget) return;
-    wordIndex = (wordIndex + 1) % words.length;
-    typeTarget.textContent = words[wordIndex];
+function rngFactory(seed) {
+  let t = seed >>> 0;
+  return function next() {
+    t += 0x6D2B79F5;
+    let x = Math.imul(t ^ (t >>> 15), 1 | t);
+    x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
   };
-  setInterval(animateWord, 1800);
+}
 
-  const setActiveLink = () => {
-    const scrollPosition = window.scrollY + 130;
-    let currentId = sections[0]?.id;
+function pick(rand, arr) {
+  return arr[Math.floor(rand() * arr.length)];
+}
 
-    sections.forEach((section) => {
-      if (scrollPosition >= section.offsetTop) {
-        currentId = section.id;
-      }
-    });
+function generateWorld(seed = Date.now()) {
+  const rand = rngFactory(seed);
+  seedLabel.textContent = `Seed: ${seed}`;
 
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute('href') === `#${currentId}`;
-      link.classList.toggle('active', isActive);
-    });
-  };
+  const hueA = Math.floor(rand() * 360);
+  const hueB = (hueA + 60 + Math.floor(rand() * 80)) % 360;
 
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const target = document.querySelector(link.getAttribute('href'));
-      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
+  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, `hsl(${hueA} 55% 22%)`);
+  sky.addColorStop(0.65, `hsl(${hueB} 50% 14%)`);
+  sky.addColorStop(1, '#05070f');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.2 });
-
-  revealItems.forEach((item) => revealObserver.observe(item));
-
-  const countObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = Number(el.dataset.counter || 0);
-      let current = 0;
-      const step = Math.max(1, Math.ceil(target / 40));
-
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          el.textContent = String(target);
-          clearInterval(timer);
-          return;
-        }
-        el.textContent = String(current);
-      }, 22);
-
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.55 });
-
-  counters.forEach((counter) => countObserver.observe(counter));
-
-  const applyTheme = (theme) => {
-    document.body.classList.toggle('light', theme === 'light');
-    themeToggle.textContent = theme === 'light' ? '☀️' : '🌙';
-  };
-
-  const storedTheme = localStorage.getItem('theme') || 'dark';
-  applyTheme(storedTheme);
-
-  themeToggle?.addEventListener('click', () => {
-    const next = document.body.classList.contains('light') ? 'dark' : 'light';
-    localStorage.setItem('theme', next);
-    applyTheme(next);
-  });
-
-  if (form) {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      form.querySelector('.form-note')?.remove();
-      const note = document.createElement('p');
-      note.className = 'form-note';
-      note.textContent = 'Transmission received. We will contact you shortly.';
-      form.appendChild(note);
-      form.reset();
-    });
+  for (let i = 0; i < 140; i += 1) {
+    const x = rand() * canvas.width;
+    const y = rand() * (canvas.height * 0.62);
+    const r = rand() * 2.1;
+    ctx.beginPath();
+    ctx.fillStyle = `hsla(${hueA + rand() * 120}, 85%, 80%, ${0.35 + rand() * 0.6})`;
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
   }
 
-  window.addEventListener('scroll', () => {
-    header?.classList.toggle('scrolled', window.scrollY > 12);
-    setActiveLink();
+  const layers = 5;
+  for (let l = 0; l < layers; l += 1) {
+    const baseY = canvas.height * (0.58 + l * 0.08);
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height);
+    for (let x = 0; x <= canvas.width; x += 24) {
+      const y = baseY - rand() * (70 + l * 20);
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.closePath();
+    ctx.fillStyle = `hsla(${hueB + l * 12}, 50%, ${12 + l * 5}%, 0.85)`;
+    ctx.fill();
+  }
+
+  const constellation = Math.floor(4 + rand() * 5);
+  ctx.strokeStyle = `hsla(${hueA + 120}, 70%, 74%, 0.35)`;
+  ctx.lineWidth = 1;
+  let prev;
+  for (let i = 0; i < constellation; i += 1) {
+    const node = { x: 120 + rand() * (canvas.width - 240), y: 70 + rand() * 200 };
+    ctx.beginPath();
+    ctx.fillStyle = '#dbeafe';
+    ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+    ctx.fill();
+    if (prev) {
+      ctx.beginPath();
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(node.x, node.y);
+      ctx.stroke();
+    }
+    prev = node;
+  }
+
+  const mood = pick(rand, moods);
+  const biome = pick(rand, biomes);
+  const event = pick(rand, events);
+
+  storyText.textContent = `In this ${mood} universe, civilizations migrated across ${biome} during a ${event}.`;
+  traits.innerHTML = '';
+
+  [
+    `Sky palette shifts between ${hueA}° and ${hueB}° hues.`,
+    `Constellation size: ${constellation} anchor stars.`,
+    `Terrain profile generated from ${layers} stacked noise layers.`
+  ].forEach((line) => {
+    const li = document.createElement('li');
+    li.textContent = line;
+    traits.appendChild(li);
   });
 
-  setActiveLink();
+  localStorage.setItem('quantum-garden-seed', String(seed));
+}
+
+seedBtn.addEventListener('click', () => generateWorld(Math.floor(Math.random() * 1_000_000_000)));
+saveBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = `quantum-garden-${Date.now()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
 });
+
+const savedSeed = Number(localStorage.getItem('quantum-garden-seed'));
+generateWorld(Number.isFinite(savedSeed) && savedSeed > 0 ? savedSeed : Date.now());

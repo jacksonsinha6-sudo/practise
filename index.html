@@ -3,119 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creative Studio X</title>
+  <title>Quantum Garden — Generated Experience</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="bg-orb orb-a" aria-hidden="true"></div>
-  <div class="bg-orb orb-b" aria-hidden="true"></div>
-  <div class="grid-overlay" aria-hidden="true"></div>
-
-  <header>
-    <div class="container nav">
-      <a href="#home" class="brand">Creative Studio <span>X</span></a>
-      <nav aria-label="Primary navigation">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#capabilities">Capabilities</a></li>
-          <li><a href="#showcase">Showcase</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
-    </div>
+  <header class="topbar">
+    <a href="#" class="brand">Quantum Garden</a>
+    <button id="seed-btn" type="button" class="btn ghost">Generate New Reality</button>
   </header>
 
   <main>
-    <section id="home" class="hero container reveal">
-      <p class="eyebrow">10TH GENERATION DIGITAL EXPERIENCE</p>
-      <h1>We craft <span id="type-target">extraordinary</span> products for the next era.</h1>
-      <p class="hero-copy">
-        AI-assisted strategy, cinematic interfaces, and ultra-fast engineering — blended into one
-        premium launch system for modern brands.
+    <section class="hero">
+      <p class="eyebrow">AI + HUMAN IMAGINATION</p>
+      <h1>An ever-changing web page that grows unique worlds on demand.</h1>
+      <p class="lead">
+        Each click synthesizes a fresh scene using deterministic seeds: new palette, new skyline,
+        new constellations, new micro-story.
       </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#contact">Launch With Us</a>
-        <a class="btn btn-secondary" href="#showcase">See Live Concepts</a>
-      </div>
-
-      <div class="stats">
-        <article class="stat-card">
-          <h3 data-counter="120">0</h3>
-          <p>Projects Delivered</p>
-        </article>
-        <article class="stat-card">
-          <h3 data-counter="42">0</h3>
-          <p>Global Partners</p>
-        </article>
-        <article class="stat-card">
-          <h3 data-counter="99">0</h3>
-          <p>Client Satisfaction %</p>
-        </article>
+      <div class="hero-actions">
+        <button id="save-btn" type="button" class="btn">Save This Universe</button>
+        <span id="seed-label" class="seed">Seed: 0</span>
       </div>
     </section>
 
-    <section id="capabilities" class="container reveal">
-      <h2 class="section-title">Core Capabilities</h2>
-      <div class="grid cards">
-        <article class="card">
-          <p class="chip">Design Intelligence</p>
-          <h3>Immersive UX Systems</h3>
-          <p>Fluid visual language, micro-interactions, and brand-consistent user journeys.</p>
-        </article>
-        <article class="card">
-          <p class="chip">Engineering Velocity</p>
-          <h3>Modern Frontend Builds</h3>
-          <p>Performant, accessible interfaces optimized for speed, SEO, and growth.</p>
-        </article>
-        <article class="card">
-          <p class="chip">Growth Layer</p>
-          <h3>Conversion Optimization</h3>
-          <p>Data-backed decisions to transform clicks into loyal users and revenue.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="showcase" class="container reveal">
-      <h2 class="section-title">Future-Ready Showcase</h2>
-      <div class="showcase-panel">
-        <div>
-          <h3>Neon Commerce Platform</h3>
-          <p>
-            Elevated shopping experiences with adaptive UI, contextual recommendations,
-            and blazing-fast product discovery.
-          </p>
-        </div>
-        <ul>
-          <li>⚡ Core Web Vitals optimized</li>
-          <li>🧠 Smart personalization-ready</li>
-          <li>🌍 Global-first localization design</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contact" class="container reveal">
-      <h2 class="section-title">Start Your Next-Gen Build</h2>
-      <form class="contact" action="#" method="post">
-        <div>
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
-        </div>
-        <div>
-          <label for="message">Project Vision</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit">Transmit Inquiry</button>
-      </form>
+    <section class="stage-wrap">
+      <canvas id="stage" width="1200" height="640" aria-label="Generated world visualization"></canvas>
+      <aside class="story-card">
+        <h2>World Narrative</h2>
+        <p id="story-text">Press “Generate New Reality” to grow a new world.</p>
+        <ul id="traits"></ul>
+      </aside>
     </section>
   </main>
 
   <footer>
-    <div class="container">© 2026 Creative Studio X — Designed for the next generation.</div>
+    <p>Built as a generative “10th-gen” experiment — no two refreshes are alike.</p>
   </footer>
 
   <script src="script.js"></script>
