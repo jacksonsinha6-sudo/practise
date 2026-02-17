@@ -3,56 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creative Studio</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>Creative Studio X</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="bg-orb orb-a" aria-hidden="true"></div>
+  <div class="bg-orb orb-b" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
   <header>
     <div class="container nav">
-      <div class="brand">Creative Studio</div>
+      <a href="#home" class="brand">Creative Studio <span>X</span></a>
       <nav aria-label="Primary navigation">
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#showcase">Showcase</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
 
   <main>
-    <section id="home" class="hero container">
-      <h1>Build a fast, modern web presence.</h1>
-      <p>
-        This is a clean HTML page template with responsive layout, accessible form fields,
-        and polished styling. Use it as a starting point for your next landing page.
+    <section id="home" class="hero container reveal">
+      <p class="eyebrow">10TH GENERATION DIGITAL EXPERIENCE</p>
+      <h1>We craft <span id="type-target">extraordinary</span> products for the next era.</h1>
+      <p class="hero-copy">
+        AI-assisted strategy, cinematic interfaces, and ultra-fast engineering — blended into one
+        premium launch system for modern brands.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="#contact">Start a Project</a>
-        <a class="btn btn-secondary" href="#services">View Services</a>
+        <a class="btn btn-primary" href="#contact">Launch With Us</a>
+        <a class="btn btn-secondary" href="#showcase">See Live Concepts</a>
+      </div>
+
+      <div class="stats">
+        <article class="stat-card">
+          <h3 data-counter="120">0</h3>
+          <p>Projects Delivered</p>
+        </article>
+        <article class="stat-card">
+          <h3 data-counter="42">0</h3>
+          <p>Global Partners</p>
+        </article>
+        <article class="stat-card">
+          <h3 data-counter="99">0</h3>
+          <p>Client Satisfaction %</p>
+        </article>
       </div>
     </section>
 
-    <section id="services" class="container">
-      <h2 class="section-title">Services</h2>
-      <div class="grid">
+    <section id="capabilities" class="container reveal">
+      <h2 class="section-title">Core Capabilities</h2>
+      <div class="grid cards">
         <article class="card">
-          <h3>Design</h3>
-          <p>Modern interfaces focused on clarity, consistency, and conversion.</p>
+          <p class="chip">Design Intelligence</p>
+          <h3>Immersive UX Systems</h3>
+          <p>Fluid visual language, micro-interactions, and brand-consistent user journeys.</p>
         </article>
         <article class="card">
-          <h3>Development</h3>
-          <p>Reliable front-end implementation using best practices and clean code.</p>
+          <p class="chip">Engineering Velocity</p>
+          <h3>Modern Frontend Builds</h3>
+          <p>Performant, accessible interfaces optimized for speed, SEO, and growth.</p>
         </article>
         <article class="card">
-          <h3>Optimization</h3>
-          <p>Performance and SEO improvements to help your site grow sustainably.</p>
+          <p class="chip">Growth Layer</p>
+          <h3>Conversion Optimization</h3>
+          <p>Data-backed decisions to transform clicks into loyal users and revenue.</p>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="container">
-      <h2 class="section-title">Contact</h2>
+    <section id="showcase" class="container reveal">
+      <h2 class="section-title">Future-Ready Showcase</h2>
+      <div class="showcase-panel">
+        <div>
+          <h3>Neon Commerce Platform</h3>
+          <p>
+            Elevated shopping experiences with adaptive UI, contextual recommendations,
+            and blazing-fast product discovery.
+          </p>
+        </div>
+        <ul>
+          <li>⚡ Core Web Vitals optimized</li>
+          <li>🧠 Smart personalization-ready</li>
+          <li>🌍 Global-first localization design</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+      <h2 class="section-title">Start Your Next-Gen Build</h2>
       <form class="contact" action="#" method="post">
         <div>
           <label for="name">Name</label>
@@ -63,17 +106,18 @@
           <input id="email" name="email" type="email" required>
         </div>
         <div>
-          <label for="message">Message</label>
+          <label for="message">Project Vision</label>
           <textarea id="message" name="message" rows="5" required></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Send Message</button>
+        <button class="btn btn-primary" type="submit">Transmit Inquiry</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <div class="container">© 2026 Creative Studio. All rights reserved.</div>
+    <div class="container">© 2026 Creative Studio X — Designed for the next generation.</div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
