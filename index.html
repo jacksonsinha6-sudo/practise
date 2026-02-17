@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Studio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Creative Studio</div>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero container">
+      <h1>Build a fast, modern web presence.</h1>
+      <p>
+        This is a clean HTML page template with responsive layout, accessible form fields,
+        and polished styling. Use it as a starting point for your next landing page.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Start a Project</a>
+        <a class="btn btn-secondary" href="#services">View Services</a>
+      </div>
+    </section>
+
+    <section id="services" class="container">
+      <h2 class="section-title">Services</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Design</h3>
+          <p>Modern interfaces focused on clarity, consistency, and conversion.</p>
+        </article>
+        <article class="card">
+          <h3>Development</h3>
+          <p>Reliable front-end implementation using best practices and clean code.</p>
+        </article>
+        <article class="card">
+          <h3>Optimization</h3>
+          <p>Performance and SEO improvements to help your site grow sustainably.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="container">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact" action="#" method="post">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Creative Studio. All rights reserved.</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
